@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% block title %}Plants Homepage{% endblock %} 
+
+{% block body %}
+<h1> Welcome</h1>
+<h2> Create an Account</h2>
+<form method="POST">
+    
+    <p>
+        Username <input type="text" name="username">
+    </p>
+    
+    <p>
+        Email <input type="text" name="email">
+    </p>
+
+    <p>
+        password <input type="password" name="password">
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
+</form>
+{% endblock %} 

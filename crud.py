@@ -12,8 +12,22 @@ def create_user(first_name, username, email, password):
     
     return user
 
-# def verify_user(username, password):
-#     """verify if user has an account"""
+def verify_user(username, password):
+    """verify if user has an account"""
+    user=User(username=username, password=password)
+    
+    db.session.add(user)
+    db.session.commit()
+    
+    return user
+
+def favourite_a_plant(user, plant):
+    liked=Favourite(user=user, plant=plant)
+    
+    db.session.add(liked)
+    db.session.commit()
+
+    return liked
 
 
 if __name__ == '__main__':
