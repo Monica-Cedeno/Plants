@@ -29,8 +29,8 @@ class Plant(db.Model):
     __tablename__='plants'
 
     plant_id = db.Column(db.Integer,
-                        autoincrement=True,
                         primary_key=True)
+    name = db.Column(db.String)
     img_url = db.Column(db.String)
 
     def __repr__(self):
