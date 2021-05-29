@@ -19,8 +19,12 @@ class User(db.Model):
     favourite_plants= db.relationship("Plant",
                             secondary="favourites",
                             backref="users_who_liked")
+                            ##secondary reference connects the plants and users
+                            ##tables, we dont want to store lists. Secondary pretends 
+                            ##that table doesnt need to exist
     
     def __repr__(self):
+    
         return f'<User user_id={self.user_id} email={self.email}>'
 
 class Plant(db.Model):
@@ -49,7 +53,7 @@ class Favourite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     def __repr__(self):
-        return f'<plant plant_id={self.plant_id}>'
+        return f'<Liked plant_id={self.plant_id}>'
 
 
 

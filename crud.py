@@ -21,8 +21,8 @@ def verify_user(username, password):
     
     return user
 
-def favourite_a_plant(user, plant):
-    liked=Favourite(user=user, plant=plant)
+def favourite_a_plant(user_id, plant_id):
+    liked=Favourite(user_id=user_id, plant_id=plant_id)
     
     db.session.add(liked)
     db.session.commit()
