@@ -29,6 +29,16 @@ def favourite_a_plant(user_id, plant_id):
 
     return liked
 
+def adding_plant(plant_id, name, img_url=None): 
+    # TODO: opportunity to optimize: could include this logic inside the favourite_a_plant fn, 
+    # use one db.commit for both plan and fav
+    plant = Plant(plant_id=plant_id, name=name, img_url=img_url)
+
+    db.session.add(plant)
+    db.session.commit()
+
+    return plant 
+
 
 if __name__ == '__main__':
     from server import app

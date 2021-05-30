@@ -30,7 +30,9 @@ function displayPlants (plants){
 
         // console.log(p.attributes.name);
         i = i + 1;
-        Unordered.innerHTML+=(`<li id=${i}>${p.attributes.name}<div hidden>${p.attributes.binomial_name}</div></li>`);
+        console.log("p = ", p);
+        // console.log(`p.relationships.companions.links.related = ${p.relationships.companions.links.related}`)
+        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${p.attributes.binomial_name} <input type=hidden name="plant_id" value=${p.id}/><input type=hidden name="name" value=${p.attributes.name}/><input type="submit"/> </div></form></li>`);
         let results = document.getElementById(`${i}`);
     }
 
@@ -49,7 +51,7 @@ const loadPlants = async () => {
     const newItem = (testing.value);
     const res = await fetch(`https://openfarm.cc/api/v1/crops/?filter=${newItem}`);
     allCrops = await res.json();
-    console.log(allCrops);
+    // console.log(allCrops);
     return allCrops;
 };
 

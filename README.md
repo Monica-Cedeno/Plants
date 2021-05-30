@@ -1,12 +1,12 @@
 ### MVP
 ## Login
-    - [ ] route to render login.html
+    - [x] route to render login.html
         - this form will have `<form action="/submit-login" method="POST">` (the opening tag)
         - each input should have `name="password"` 
-    - [ ] route to handle post request from form submit (in server.py)
-        - [ ] get the user's input (name/email, password)
+    - [x] route to handle post request from form submit (in server.py)
+        - [x] get the user's input (name/email, password)
             - use `request.form.get("password")`
-        - [ ] query db for user with that name/email (user crud function)
+        - [x] query db for user with that name/email (user crud function)
         - [ ] compare db user and input user's passwords
         - [ ] redirect back to login (with flash?) if fail
         - [ ] if user exists and has correct pw, redirect to main app
@@ -31,9 +31,15 @@ In order to do this before login/reg/session, all favoriting will be done by one
     - [X] make a plant object from data similar from the API
     <!-- if you enter plant information using SQLAlchemy, you created an object and a row in the db once committed  -->
     - [ ] figure out what happens when a plant already exists in the db (unique constraint) TODO: until i tackle this, just use dif plants each time
-    - [ ] get plant information from the frontend to the server 
-        -[ ] every plant is a form with a submit button 
-            -[ ] if button is clicked, use html form to send information to server
-            -[ ]  Favourite is addded to server and redirect
-        - [ ] refactor to use AJAX 
-        
+    - [x] get plant information from the frontend to the server 
+        - [x] every plant is a form with a submit button 
+            - [x] if button is clicked, use html form to send information to server
+            - [x] Favourite is added to server and redirect
+            - [ ] render a nice template with plant info
+
+## see user's fav plants
+- [ ] route to render a template "/users/<user_id>" --> "localhost://5000/users/1" if user_id is 1
+- [ ] get all fav plants for current user 
+    - make a sqlalchmey user_obj using the user_id from the url (query your db for user, by id)
+    - `user_obj.favourite_plants` --assuming user_obj is a sqlalcmey user object, you can use the relationship you made in the model 
+- [ ] use jinja to add all plants to the template (display the plants w/ jinja loop)

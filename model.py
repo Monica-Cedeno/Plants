@@ -32,7 +32,7 @@ class Plant(db.Model):
 
     __tablename__='plants'
 
-    plant_id = db.Column(db.Integer,
+    plant_id = db.Column(db.String,
                         primary_key=True)
     name = db.Column(db.String)
     img_url = db.Column(db.String)
@@ -48,7 +48,7 @@ class Favourite(db.Model):
     favourite_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    plant_id = db.Column(db.Integer,
+    plant_id = db.Column(db.String,
                         db.ForeignKey('plants.plant_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
