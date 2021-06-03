@@ -8,7 +8,7 @@ app = Flask(__name__)
 def homepage():
     """View homepage."""
 
-    return render_template("login.html")
+    return render_template("search.html")
 
 @app.route("/newuser", methods=["POST"])
 def create_account():
@@ -28,8 +28,7 @@ def create_account():
         flash("Your account was created successfully! You can now log in")
         session['user_id'] = user.user_id
         session['username'] = user.username
-
-
+    return render_template("login.html")
 
 # @app.route("/response", methods=["POST"])
 # def response():
@@ -37,7 +36,7 @@ def create_account():
 #     email = request.form.get("email")
 #     return render_template("login.html", username=username, email=email)
 
-@app.route("/login", methods=["POST"])
+# @app.route("/login", methods=["POST"])
 
 @app.route("/favourite_plant", methods=["POST"])
 def favourite_plant():
@@ -51,13 +50,18 @@ def favourite_plant():
     # when login works, use user_id from session
     return "yay"
 
-# @app.route("/logout")
-# def logout():
-#     if 'username' in session:
-#         session.pop('username', None)
-#         session.pop('user_id', None)
+@app.route("/users/<user_id>")
+def favourite_page():
     
-#     return ("hooray, logged out")
+    return "stuff"
+
+@app.route("/logout")
+def logout():
+    if 'username' in session:
+        session.pop('username', None)
+        session.pop('user_id', None)
+    
+    return ("hooray, logged out")
 
 
 
