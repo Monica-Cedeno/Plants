@@ -38,7 +38,7 @@ class Plant(db.Model):
     img_url = db.Column(db.String)
 
     def __repr__(self):
-        return f'<plant plant_id={self.plant_id}>'
+        return f'<plant plant_name={self.name}>'
 
 class Favourite(db.Model):
     """A favourited plant"""

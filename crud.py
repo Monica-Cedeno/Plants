@@ -12,9 +12,9 @@ def create_user(first_name, username, email, password):
     
     return user
 
-def verify_user(username, password):
+def verify_user(email, password):
     """verify if user has an account"""
-    user=User(username=username, password=password)
+    user=User(email=email, password=password)
     
     db.session.add(user)
     db.session.commit()
@@ -38,6 +38,11 @@ def adding_plant(plant_id, name, img_url=None):
     db.session.commit()
 
     return plant 
+
+def get_plants_by_user(user_id):
+    
+
+    return User.query.get(user_id).favourite_plants
 
 
 if __name__ == '__main__':

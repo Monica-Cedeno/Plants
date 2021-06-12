@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet"
+        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
         <title>
             {% block title %}Plant Whisperer{% endblock %}
         </title>
@@ -8,8 +10,32 @@
         {% block head %}
         {% endblock %}
     </head>
+    <body?>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/user_favs">
+                        <!-- <img class="user-favs"
+                            src="/static/img/watermelon.png"> -->
+                        My Favourite Plants
+                    </a>
+                </li>
+                <li><a href="/login">Log In</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+    </body>
+
     <body>
         {% block body %}{% endblock %} 
+        <ul>
+            {% for message in get_flashed_messages() %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
         
     </body>
+
 </html>

@@ -54,13 +54,15 @@ async function displayPlants (plants){
 
     let i = 0;
 
+    //add an array, append all p plants to array, call array in <li>
+
     for (let p of plants.data){
 
         i = i + 1;
         // console.log("p = ", p);
         const x = await findCompanions(p.id)
         // console.log(x)
-        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id}/><input type=hidden name="name" value=${p.attributes.name}/><input type="submit"/> </div></form></li>`);
+        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
         let results = document.getElementById(`${i}`);
     }
 

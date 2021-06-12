@@ -39,7 +39,7 @@ In order to do this before login/reg/session, all favoriting will be done by one
 
 ## see user's fav plants
 - [ ] route to render a template "/users/<user_id>" --> "localhost://5000/users/1" if user_id is 1
-- [ ] get all fav plants for current user 
+- [x] get all fav plants for current user 
     - make a sqlalchmey user_obj using the user_id from the url (query your db for user, by id)
     - `user_obj.favourite_plants` --assuming user_obj is a sqlalcmey user object, you can use the relationship you made in the model 
-- [ ] use jinja to add all plants to the template (display the plants w/ jinja loop)
+- [x] use jinja to add all plants to the template (display the plants w/ jinja loop)
