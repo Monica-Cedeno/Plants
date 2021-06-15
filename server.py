@@ -65,37 +65,41 @@ def previous_user():
 
     elif user:
         session['email'] = user.email
+        session['username']=user.username
+        session['user_id']=user.user_id
         flash(u'Welcome back!')
-        return redirect(f"/users/{user.user_id}")
+        return redirect("/users/favourite_plants")
 
 
 @app.route("/favourite_plant", methods=["POST"])
 def favourite_plant():
+    """This allows users to favourite a plant and add it to the db"""
+
     plant_id = request.form.get("plant_id")
     name = request.form.get("name")
     print ("*"*20)
     print (f'plant_id = {plant_id} plant name = {name}')
     print ("*"*20)
     crud.adding_plant(plant_id, name)
-    crud.favourite_a_plant(user_id=session[user_id], plant_id=plant_id) # TODO: user id is hardcoded, 
-    # when login works, use user_id from session
+    crud.favourite_a_plant(user_id=session['user_id'], plant_id=plant_id)
     flash("Successfully added to your favourites!")
     return ('/searching')
 
-@app.route("/users/<user_id>")
+@app.route("/users/favourite_plants")
 def favourite_page(user_id):
+    """this route displays the user's favourited plants"""
 
     # if 'user_id' in session:
-    print(user_id)
     fav_plants = crud.get_plants_by_user(user_id)
-    return render_template('user_favs.html', user=user_id, plants=fav_plants)
+    session['username']
+    return render_template('user_favs.html', user=session['username'], plants=fav_plants)
     # else:
     #     flash(u'Please log in to view this page', 'error-message')
     #     return redirect('/')
 
 @app.route("/searching")
 def search():
-    pass
+    
     return render_template("search.html")
 
 @app.route("/logout")
