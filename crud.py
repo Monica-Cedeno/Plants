@@ -12,14 +12,10 @@ def create_user(first_name, username, email, password):
     
     return user
 
+
 def verify_user(email, password):
     """verify if user has an account"""
-    user=User(email=email, password=password)
-    
-    db.session.add(user)
-    db.session.commit()
-    
-    return user
+    return User.query.filter(User.email == email, User.password == password).first()
 
 def favourite_a_plant(user_id, plant_id):
     liked=Favourite(user_id=user_id, plant_id=plant_id)

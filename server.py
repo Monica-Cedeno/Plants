@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, flash, session, redirect
 import crud
 import model 
 
-app = Flask(__name__)
+from jinja2 import StrictUndefined
 
+app = Flask(__name__)
 app.secret_key = 'abcdefgz'
+app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
 def homepage():
@@ -39,7 +41,7 @@ def create_account():
         
         session['user_id'] = user.user_id
         session['username'] = user.username
-        return redirect ("/favs")
+        return redirect (f"/users/{user.user_id}")
     
     else:
         flash("--ERROR--", "Email already exists!. Make an account with a different email")
@@ -50,20 +52,21 @@ def create_account():
 def previous_user():
     email = request.form.get('email')
     password = request.form.get('password')
+    
     user=crud.verify_user(email, password)
 
     if password == '' or email =='':
         flash('--ERROR--', 'log in failed, Try again')
         return redirect ('/newuser')
-
-    if user:
-        session['email'] = user.email
-        session['password'] = user.password
-        return redirect('/favs')
-
-    else:
-        flash("--ERROR--", "Log in failed", "Try again")
+    
+    elif not user or user.password != password:
+        flash("--ERROR--", "Log in failed", "The email or password is incorrect. Try again")
         return redirect ('/newuser')
+
+    elif user:
+        session['email'] = user.email
+        flash(u'Welcome back!')
+        return redirect(f"/users/{user.user_id}")
 
 
 @app.route("/favourite_plant", methods=["POST"])
@@ -74,17 +77,18 @@ def favourite_plant():
     print (f'plant_id = {plant_id} plant name = {name}')
     print ("*"*20)
     crud.adding_plant(plant_id, name)
-    crud.favourite_a_plant(user_id=1, plant_id=plant_id) # TODO: user id is hardcoded, 
+    crud.favourite_a_plant(user_id=session[user_id], plant_id=plant_id) # TODO: user id is hardcoded, 
     # when login works, use user_id from session
     flash("Successfully added to your favourites!")
-    return "yay"
+    return ('/searching')
 
-@app.route("/favs")
-def favourite_page():
+@app.route("/users/<user_id>")
+def favourite_page(user_id):
 
     # if 'user_id' in session:
-    fav_plants = crud.get_plants_by_user('1')
-    return render_template('user_favs.html', user='Monica', plants=fav_plants)
+    print(user_id)
+    fav_plants = crud.get_plants_by_user(user_id)
+    return render_template('user_favs.html', user=user_id, plants=fav_plants)
     # else:
     #     flash(u'Please log in to view this page', 'error-message')
     #     return redirect('/')

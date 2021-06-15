@@ -29,7 +29,7 @@ async function displayPlants (plants){
     
         r = await fetch(`https://openfarm.cc/${p.links.self.api}`)
         data = await r.json()
-        // console.log(data)
+
         companion_ids = []
 
         for (let companion of data.data.relationships.companions.data){
@@ -37,7 +37,7 @@ async function displayPlants (plants){
             let c = companion.id
             companion_ids.push(c)
         };
-        // console.log(companion_ids)
+      
 
         const crops = {}
 
@@ -52,7 +52,11 @@ async function displayPlants (plants){
         }
     }
 
+    
+
     let i = 0;
+
+    let received_info =[]
 
     //add an array, append all p plants to array, call array in <li>
 
@@ -60,9 +64,13 @@ async function displayPlants (plants){
 
         i = i + 1;
         // console.log("p = ", p);
+        let w = p.attributes.name
+        
+        received_info.push(w)
+
         const x = await findCompanions(p.id)
         // console.log(x)
-        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
+        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${w}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
         let results = document.getElementById(`${i}`);
     }
 
@@ -113,4 +121,3 @@ const loadPlants = async () => {
     // console.log(allCrops);
     return allCrops;
 };
-

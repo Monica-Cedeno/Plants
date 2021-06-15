@@ -7,10 +7,10 @@
         - [x] get the user's input (name/email, password)
             - use `request.form.get("password")`
         - [x] query db for user with that name/email (user crud function)
-        - [ ] compare db user and input user's passwords
-        - [ ] redirect back to login (with flash?) if fail
-        - [ ] if user exists and has correct pw, redirect to main app
-        - [ ] if user exists, add user_id to session
+        - [x] compare db user and input user's passwords
+        - [x] redirect back to login (with flash?) if fail
+        - [x] if user exists and has correct pw, redirect to main app
+        - [ x] if user exists, add user_id to session
         <!-- session is a magical dictionary that you can access from any view function in your server 
         session['user_id] = user.user_id
         -->
@@ -35,7 +35,6 @@ In order to do this before login/reg/session, all favoriting will be done by one
         - [x] every plant is a form with a submit button 
             - [x] if button is clicked, use html form to send information to server
             - [x] Favourite is added to server and redirect
-            - [ ] render a nice template with plant info
 
 ## see user's fav plants
 - [ ] route to render a template "/users/<user_id>" --> "localhost://5000/users/1" if user_id is 1
