@@ -1,29 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="icon" href="data:,">
-    </head>
-    <body>
-        <div class="container">
-            <div id="searchWrapper"></div>
-            <form id=searchForm>
-            <input
+{% extends 'base.html' %}
+{% block title %}Search Page{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <form id="searchForm">
+        <input
             type="text"
             name="searchBar"
             id="searchBar"
             placeholder="search for a plant"
-            />
-            <input type='submit' value='Search'>
-            </form>
-        </div>
+        />
+        <input type='submit' value='Search' />
+    </form>
+</div>
 
-        <div id="displayResults">
+<div id="displayResults">
             <!--this is a target to display the search results-->
-            <ul>
-                <li>burpee tomato</li>
-                <li>Heirloom Tomato</li>
-            </ul>
-        </div>
-        <script src=/static/search_api.js></script>
-    </body>
-</html>
+    <ul id="target">
+        <li>burpee tomato</li>
+        <li>Heirloom Tomato</li>
+    </ul>
+</div>
+
+<script src=/static/search_api.js></script>
+
+{% endblock %} 
+
+

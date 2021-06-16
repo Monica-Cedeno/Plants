@@ -2,11 +2,12 @@ const searchForm = document.getElementById('searchForm');
 
 searchForm.addEventListener('submit',(e) => {
     e.preventDefault();
-    const result= document.getElementById('displayResults');
-    const attemptOne=document.querySelector('ul');
-    const testing=document.getElementById("searchBar");
+
     loadPlants().then(plants => displayPlants(plants));
+
 });
+
+///AllCrops is now called plants 
 
 async function plantClickHandler (evt){
 
@@ -20,59 +21,77 @@ async function plantClickHandler (evt){
 
 async function displayPlants (plants){
 
-    Unordered = document.querySelector('ul');
+    Unordered = document.querySelector('#target');
     Unordered.innerHTML='';
 
     console.log(plants);
 
-    for (let p of plants.data){
-    
-        r = await fetch(`https://openfarm.cc/${p.links.self.api}`)
-        data = await r.json()
+    let promises = [];
 
-        companion_ids = []
+    for (let p of plants.data){
+        //we have p, we do the fetch request
+        //the response promise is the result of doing the fetch
+        let responsePromise = fetch(`https://openfarm.cc/${p.links.self.api}`);
+        //the parsedJsonPromise is the result of calling .json() on the response received from responsePromise
+        let parsedJsonPromise = responsePromise.then(result => result.json());
+        promises.push(parsedJsonPromise);
+    }
+
+    const parsedResults = await Promise.all(promises);
+
+    const crops = {};
+
+    const cropPhotos = {};
+
+    const cropCompanions = {};
+
+    for (let data of parsedResults){
+
+        companion_ids = [];
 
         for (let companion of data.data.relationships.companions.data){
-            // console.log (companion);
-            let c = companion.id
-            companion_ids.push(c)
+            let c = companion.id;
+            companion_ids.push(c);
         };
-      
 
-        const crops = {}
+        cropCompanions[data.data.id] = companion_ids
+
+
 
         for (let obj of data.included){
             if (obj.type === "crops"){
                 crops[obj.id] = obj;
             }
-        }
-
-        for ( let id of companion_ids){
-            // console.log (crops[id]['attributes']['name']);
+            else if (obj.type === "crops-pictures"){
+                cropPhotos[data.data.id] = obj.attributes.image_url
+            }
         }
     }
-
-    
 
     let i = 0;
 
-    let received_info =[]
-
-    //add an array, append all p plants to array, call array in <li>
-
+    let newHtml= ''
+    
     for (let p of plants.data){
+        console.log (p.id)
+
 
         i = i + 1;
-        // console.log("p = ", p);
-        let w = p.attributes.name
-        
-        received_info.push(w)
 
-        const x = await findCompanions(p.id)
-        // console.log(x)
-        Unordered.innerHTML+=(`<li id=${i}> <form action="/favourite_plant" method="POST">${w}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
+        const x = []
+
+        for (let companionId of cropCompanions[p.id]){
+            x.push(crops[companionId]['attributes']['name'])
+        }
+
+        if (cropPhotos[p.id]){   
+            newHtml += (`<li id=${i}><img src=${cropPhotos[p.id]} height=200px width=200px><form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
+        }
         let results = document.getElementById(`${i}`);
+
     }
+
+    Unordered.innerHTML = newHtml
 
     i = 0;
 
@@ -82,35 +101,6 @@ async function displayPlants (plants){
         results.addEventListener("click", plantClickHandler);
         console.log(results);
     }
-}
-
-async function findCompanions(id){
-    r = await fetch(`https://openfarm.cc/api/v1/crops/${id}`)
-    data = await r.json()
-    console.log(data)
-    companion_ids = []
-
-    for (let companion of data.data.relationships.companions.data){
-        let c = companion.id
-        companion_ids.push(c)
-    }
-
-    const crops = {}
-
-    for (let obj of data.included){
-        if (obj.type === "crops"){
-            crops[obj.id] = obj;
-        }
-    }
-
-    let retrieved_ids = []
-
-    for ( let id of companion_ids){
-        console.log (crops[id]['attributes']['name']);
-        retrieved_ids.push((crops[id]['attributes']['name']))
-    }
-    console.log(retrieved_ids)
-    return retrieved_ids
 }
 
 const loadPlants = async () => {

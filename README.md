@@ -10,7 +10,7 @@
         - [x] compare db user and input user's passwords
         - [x] redirect back to login (with flash?) if fail
         - [x] if user exists and has correct pw, redirect to main app
-        - [ x] if user exists, add user_id to session
+        - [x] if user exists, add user_id to session
         <!-- session is a magical dictionary that you can access from any view function in your server 
         session['user_id] = user.user_id
         -->
@@ -37,7 +37,7 @@ In order to do this before login/reg/session, all favoriting will be done by one
             - [x] Favourite is added to server and redirect
 
 ## see user's fav plants
-- [ ] route to render a template "/users/<user_id>" --> "localhost://5000/users/1" if user_id is 1
+- [x] route to render a template "/users/<user_id>" --> "localhost://5000/users/1" if user_id is 1
 - [x] get all fav plants for current user 
     - make a sqlalchmey user_obj using the user_id from the url (query your db for user, by id)
     - `user_obj.favourite_plants` --assuming user_obj is a sqlalcmey user object, you can use the relationship you made in the model 

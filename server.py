@@ -12,13 +12,13 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage."""
 
-    return render_template("homepage.html")
+    return render_template("homepage.html", logged_in=False)
 
 @app.route("/newuser", methods=["GET"])
 def show_login():
     """Show login form."""
 
-    return render_template("login.html")
+    return render_template("login.html", logged_in=False)
 
 @app.route("/newuser", methods=["POST"])
 def create_account():
@@ -41,7 +41,7 @@ def create_account():
         
         session['user_id'] = user.user_id
         session['username'] = user.username
-        return redirect (f"/users/{user.user_id}")
+        return redirect ("/favourite_plant")
     
     else:
         flash("--ERROR--", "Email already exists!. Make an account with a different email")
@@ -86,13 +86,13 @@ def favourite_plant():
     return ('/searching')
 
 @app.route("/users/favourite_plants")
-def favourite_page(user_id):
+def favourite_page():
     """this route displays the user's favourited plants"""
-
+    user_id=session['user_id']
     # if 'user_id' in session:
     fav_plants = crud.get_plants_by_user(user_id)
-    session['username']
-    return render_template('user_favs.html', user=session['username'], plants=fav_plants)
+    
+    return render_template('user_favs.html', user=session['username'], plants=fav_plants, logged_in=True)
     # else:
     #     flash(u'Please log in to view this page', 'error-message')
     #     return redirect('/')
@@ -100,7 +100,7 @@ def favourite_page(user_id):
 @app.route("/searching")
 def search():
     
-    return render_template("search.html")
+    return render_template("search.html", logged_in=True)
 
 @app.route("/logout")
 def logout():

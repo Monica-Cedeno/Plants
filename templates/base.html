@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="data:,">
         <link rel="stylesheet"
         href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
         <title>
@@ -10,7 +11,7 @@
         {% block head %}
         {% endblock %}
     </head>
-    <body?>
+    <body>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -20,26 +21,27 @@
                         My Favourite Plants
                     </a>
                 </li>
-                <li><a href="/login">Log In</a></li>
+                <li><a href="/newuser">Log In</a></li>
 
                 <li><a href="/searching">Search</a></li>
+                
+                {% if logged_in == True %}
 
                 <li><a href="/logout">Log Out</a></li>
+
+                {% endif %}
+
             </ul>
         </div>
-
-    </div>
-</div>
+        <div>
+            {% block body %}
+            
+            {% endblock %} 
+            <ul>
+                {% for message in get_flashed_messages() %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </body>
-
-    <body>
-        {% block body %}{% endblock %} 
-        <ul>
-            {% for message in get_flashed_messages() %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        
-    </body>
-
 </html>
