@@ -12,8 +12,12 @@
         {% endblock %}
     </head>
     <body>
+        {% for message in get_flashed_messages() %}
+                {{ message }}
+        {% endfor %}
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                {% if logged_in == False %}
                 <li>
                     <a href="/users/favourite_plants">
                         <!-- <img class="user-favs"
@@ -24,8 +28,16 @@
                 <li><a href="/newuser">Log In</a></li>
 
                 <li><a href="/searching">Search</a></li>
-                
-                {% if logged_in == True %}
+
+                {% else %}
+                <li>
+                    <a href="/users/favourite_plants">
+                        <!-- <img class="user-favs"
+                            src="/static/img/watermelon.png"> -->
+                        My Favourite Plants
+                    </a>
+                </li>
+                <li><a href="/searching">Search</a></li>
 
                 <li><a href="/logout">Log Out</a></li>
 
@@ -37,11 +49,6 @@
             {% block body %}
             
             {% endblock %} 
-            <ul>
-                {% for message in get_flashed_messages() %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
         </div>
     </body>
 </html>

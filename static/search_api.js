@@ -71,7 +71,7 @@ async function displayPlants (plants){
     let i = 0;
 
     let newHtml= ''
-    
+
     for (let p of plants.data){
         console.log (p.id)
 
@@ -87,6 +87,7 @@ async function displayPlants (plants){
         if (cropPhotos[p.id]){   
             newHtml += (`<li id=${i}><img src=${cropPhotos[p.id]} height=200px width=200px><form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
         }
+
         let results = document.getElementById(`${i}`);
 
     }
