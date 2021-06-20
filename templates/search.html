@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Search Page{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <form id="searchForm">
+    <form class = "form-inline my-2 my-lg-0", id="searchForm">
         <input
             type="text"
             name="searchBar"
@@ -18,8 +18,7 @@
 <div id="displayResults">
             <!--this is a target to display the search results-->
     <ul id="target">
-        <li>burpee tomato</li>
-        <li>Heirloom Tomato</li>
+        <li>Start your search here!</li>
     </ul>
 </div>
 

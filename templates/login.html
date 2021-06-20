@@ -2,59 +2,51 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+
+
   <h1>Welcome!</h1>
 
   <form action="/login" method="POST">
   <h2> Log In </h2>
-  <div>
-  <p>
-    Email <input type="text" name="email" placeholder="Enter email">
-  </p>
+  <div class="col-md-4 mb-3">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small name="email" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div>
-  <p>
-    Password <input type="password" name="password">
-  </p>
+  <div class="col-md-4 mb-3">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" name="password" placeholder="Password">
   </div>
-  <div>
-  <p>
-    <button type="submit">Submit</button>
-  </p>
-  </form> 
 
-
+  <button type="submit" class="btn btn-primary">Submit</button>
   
+  </form> 
 
   <div>
     <form action = "/newuser" method = "POST" >
     <h3> Don't have an account yet? </h3>
     <h4> Fill out this form and start saving and pairing!</h4>
-    <div>
-      <p>
-      <label for="first_name"> First Name</label>
-      <input type="text" name="first_name">
-      </p>
+    <div class="col-md-4 mb-3">
+      <label for="first_name">First Name</label>
+      <input type="first_name" class="form-control" name="first_name" aria-describedby="firstname" placeholder="First Name">
     </div>
-    <div>
-      <p>
-      <label for="username"> Username</label>
-      <input type="text" name="username">
-      </p>
+
+    <div class="col-md-4 mb-3">
+        <label for="username">Username</label>
+        <input type="username" class="form-control" name="username" aria-describedby="username" placeholder="Username">
     </div>
-    <div>
-      <p>
-      <label for="email">Email</label>
-      <input type="text" name="new_email">
-      </p>
+    
+    <div class="col-md-4 mb-3">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" name="email" aria-describedby="email" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    <div>
-      <p>
-      <label for="create_password">Password</label>
-      <input type="text" name="new_password">
-      </p>
-      </div>
-    <button type="submit">Submit</button>
-    </p>
+
+    <div class="col-md-4 mb-3">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
     </form> 
     </div>
 {% endblock %}

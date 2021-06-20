@@ -1,0 +1,11 @@
+div.homepage {
+    background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url("https://images.pexels.com/photos/1105019/pexels-photo-1105019.jpeg"); 
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    height: auto;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    padding-top: 30em
+}

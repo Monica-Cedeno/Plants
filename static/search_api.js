@@ -75,17 +75,16 @@ async function displayPlants (plants){
     for (let p of plants.data){
         console.log (p.id)
 
-
-        i = i + 1;
-
         const x = []
 
         for (let companionId of cropCompanions[p.id]){
             x.push(crops[companionId]['attributes']['name'])
         }
 
-        if (cropPhotos[p.id]){   
-            newHtml += (`<li id=${i}><img src=${cropPhotos[p.id]} height=200px width=200px><form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
+        if (cropPhotos[p.id]){ 
+            i = i + 1;
+
+            newHtml += (`<li class="plants" id=${i}><img src=${cropPhotos[p.id]} height=200px width=200px><form action="/favourite_plant" method="POST">${p.attributes.name}<div hidden>${x} <input type=hidden name="plant_id" value=${p.id} /><input type=hidden name="name" value="${p.attributes.name}" /><input type="submit" /></div></form></li>`);
         }
 
         let results = document.getElementById(`${i}`);
@@ -96,11 +95,11 @@ async function displayPlants (plants){
 
     i = 0;
 
-    for (let p of plants.data){
-        i = i + 1;
-        let results = document.getElementById(`${i}`);
-        results.addEventListener("click", plantClickHandler);
-        console.log(results);
+    const newData = document.querySelectorAll(".plants");
+
+    for (let p of newData){
+
+        p.addEventListener("click", plantClickHandler);
     }
 }
 
