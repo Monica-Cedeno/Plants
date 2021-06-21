@@ -26,8 +26,8 @@ def create_account():
 
     first_name = request.form.get("first_name")
     username = request.form.get("username")
-    email = request.form.get("new_email")
-    password = request.form.get("new_password")
+    email = request.form.get("email")
+    password = request.form.get("password")
     user = None
 
     try:
