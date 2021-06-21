@@ -1,29 +1,39 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
 
-{% block body %}
+<div class="home">
+    <link rel="stylesheet" type="text/css" href="/static/mystyles.css">
+    {% block title %}{% endblock %}
 
-<div class="container">
-    <form class = "form-inline my-2 my-lg-0", id="searchForm">
-        <input
-            type="text"
-            name="searchBar"
-            id="searchBar"
-            placeholder="search for a plant"
-        />
-        <input type='submit' value='Search' />
-    </form>
+    {% block body %}
+
+    <div class="homepage">
+        <div class="col-12">
+        </div>
+    </div>
+        <div class= "col-6"></div>
+
+    <div class="container">
+        <form class = "form-inline my-2 my-lg-0", id="searchForm">
+            <input
+                type="text"
+                name="searchBar"
+                id="searchBar"
+                placeholder="search for a plant"
+            />
+            <input type='submit' value='Search' />
+        </form>
+    </div>
+
+    <div id="displayResults">
+                <!--this is a target to display the search results-->
+        <ul id="target">
+            <li>Start your search here!</li>
+        </ul>
+    </div>
+
+    <script src=/static/search_api.js></script>
+
+    {% endblock %} 
 </div>
-
-<div id="displayResults">
-            <!--this is a target to display the search results-->
-    <ul id="target">
-        <li>Start your search here!</li>
-    </ul>
-</div>
-
-<script src=/static/search_api.js></script>
-
-{% endblock %} 
 
 
