@@ -85,21 +85,6 @@ def favourite_plant():
     flash("Successfully added to your favourites!")
     return redirect ("/searching")
 
-# @app.route("/favourite_plant_two", methods=["POST"])
-# def favourite_plant_two():
-#     print ("*"*20)
-#     print ("made it")
-#     plant_id = request.values.get("plant_id")
-#     name = request.values.get("name")
-#     print ("*"*20)
-#     print (f'plant_id = {plant_id} plant name = {name}')
-#     print ("*"*20)
-#     crud.adding_plant(plant_id, name)
-#     crud.favourite_a_plant(user_id=session['user_id'], plant_id=plant_id)
-#     flash("Successfully added to your favourites!")
-#     return redirect ("/searching")
-
-
 @app.route("/users/favourite_plants")
 def favourite_page():
     """this route displays the user's favourited plants"""

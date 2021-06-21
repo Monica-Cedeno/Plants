@@ -8,16 +8,15 @@
     </div>
 </div>
     <div class= "col-6"></div>
-<head>
-    {{user}}'s Favourite Plants
-</head>
 <body>
+    <div class="favs">
+        <p class="font-weight-bold">{{user}}'s Favourite Plants</p>
 
-<ul>
-    {% for p in plants %}
-        <li>{{p.name}}</li>
-    {% endfor %}
-</ul>
-
+    <ul>
+        {% for p in plants %}
+            <li>{{p.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 {% endblock %} 

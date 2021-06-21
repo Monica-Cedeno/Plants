@@ -9,3 +9,7 @@ div.homepage {
     align-items: center;
     padding-top: 30em
 }
+
+div.favs{
+    text-align: left;
+}
